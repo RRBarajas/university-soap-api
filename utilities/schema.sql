@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS amenity (
+  amenity_id INT AUTO_INCREMENT PRIMARY KEY,
+  amenity_name VARCHAR2(500) NOT NULL
+);
