@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:rs="http://www.encora.com/choice/university-soap-api">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <rs:getAmenityRequest>
+      <rs:id>10</rs:id>
+    </rs:getAmenityRequest>
+  </soapenv:Body>
+</soapenv:Envelope>

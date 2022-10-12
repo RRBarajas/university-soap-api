@@ -1,0 +1,17 @@
+#To run it use 'docker-compose -f docker-compose.yml up &'
+version: '3.3'
+services:
+  db:
+    image: mysql
+    volumes:
+      - cu_mysql_db:/var/lib/mysql:rw
+    environment:
+      - "MYSQL_HOST=0.0.0.0"
+      - "MYSQL_ROOT_PASSWORD=toor"
+      - "MYSQL_PASSWORD=choice"
+      - "MYSQL_USER=university"
+    ports:
+      - 3306:3306
+
+volumes:
+  cu_mysql_db:

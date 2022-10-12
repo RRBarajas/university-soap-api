@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  postgres_db:
+    image: postgres
+    container_name: cu_dc_postgres_db
+    environment:
+      - POSTGRES_DB=choice_uni_db
+      - POSTGRES_USER=choice
+      - POSTGRES_PASSWORD=university
+    ports:
+      - "5432:5432"
+    volumes:
+      - cu_postgres_db_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: adminer_dc
+    environment:
+      ADMINER_DESIGN: galkaev
+    ports:
+      - "9000:8080"
+
+volumes:
+  cu_postgres_db_data:
