@@ -3,6 +3,7 @@ package com.choice.university.endpoint;
 import static com.choice.university.constants.UniversityConstants.UNIVERSITY_NAMESPACE_URI;
 
 import com.choice.university.service.HotelService;
+import com.choice.university.service.model.CreateHotel;
 import com.choice.university.service.model.GetHotelById;
 import com.choice.university.service.model.GetHotelResponse;
 import com.choice.university.service.model.GetHotelsByName;
@@ -31,5 +32,11 @@ public class HotelEndpoint {
   @ResponsePayload
   public GetHotelsResponse getHotelsByName(@RequestPayload GetHotelsByName request) {
     return service.getHotelsByName(request.getName());
+  }
+
+  @PayloadRoot(namespace = UNIVERSITY_NAMESPACE_URI, localPart = "createHotel")
+  @ResponsePayload
+  public GetHotelResponse createHotel(@RequestPayload CreateHotel request) {
+    return service.createHotel(request);
   }
 }

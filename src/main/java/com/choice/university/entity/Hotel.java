@@ -1,6 +1,7 @@
 package com.choice.university.entity;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 import static org.hibernate.annotations.NotFoundAction.IGNORE;
@@ -33,7 +34,7 @@ public class Hotel {
   @JoinColumn(name = "address_id")
   private Address address;
 
-  @ManyToMany
+  @ManyToMany(cascade = PERSIST)
   @NotFound(action = IGNORE)
   private List<Amenity> amenities;
 }

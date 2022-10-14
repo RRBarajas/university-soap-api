@@ -14,6 +14,8 @@ public interface HotelMapper {
 
   com.choice.university.service.model.Hotel mapToHotel(Hotel hotel);
 
+  Hotel mapToHotelEntity(com.choice.university.service.model.Hotel hotel);
+
   @Mapping(source = ".", target = "hotel")
   GetHotelResponse mapToGetHotelResponse(Hotel hotel);
 

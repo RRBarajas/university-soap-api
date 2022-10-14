@@ -14,6 +14,8 @@ public interface AmenityMapper {
 
   com.choice.university.service.model.Amenity mapToAmenity(Amenity amenity);
 
+  Amenity mapToAmenityEntity(com.choice.university.service.model.Amenity amenity);
+
   @Mapping(source = ".", target = "amenity")
   GetAmenityResponse mapToGetAmenityResponse(Amenity amenity);
 
@@ -34,5 +36,11 @@ public interface AmenityMapper {
             .map(this::mapToAmenity)
             .toList());
     return responseAmenities;
+  }
+
+  default List<Amenity> mapToAmenitiesList(Amenities amenities) {
+    return amenities.getAmenity().stream()
+        .map(this::mapToAmenityEntity)
+        .toList();
   }
 }
