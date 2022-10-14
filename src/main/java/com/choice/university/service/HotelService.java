@@ -44,4 +44,11 @@ public class HotelService {
     // TODO: If passing invalid Amenities, the response contains NIL nodes
     return mapper.mapToGetHotelResponse(repository.save(hotelEntity));
   }
+
+  public void deleteHotel(Long id) {
+    if (!repository.existsById(id)) {
+      throw new EntityNotFoundException("Hotel", id);
+    }
+    repository.deleteById(id);
+  }
 }
