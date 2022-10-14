@@ -20,6 +20,14 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="getAmenitiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="amenities" type="tns:amenities"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
   <xs:complexType name="amenity">
     <xs:sequence>
       <xs:element name="id" type="xs:long"/>
@@ -27,11 +35,46 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:element name="getAmenitiesResponse">
+  <xs:complexType name="amenities">
+    <xs:sequence>
+      <xs:element name="amenity" type="tns:amenity" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <!-- Hotel related -->
+  <xs:element name="getHotelById">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="amenity" type="tns:amenity" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="id" type="xs:long"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+
+  <xs:element name="getHotelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="hotel" type="tns:hotel"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="hotel">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="rating" type="xs:int"/>
+      <xs:element name="address" type="tns:address"/>
+      <xs:element name="amenities" type="tns:amenities"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="streetName" type="xs:string"/>
+      <xs:element name="stateName" type="xs:string"/>
+      <xs:element name="countryName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>
