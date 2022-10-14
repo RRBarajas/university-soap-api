@@ -59,6 +59,28 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="getHotelsByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getHotelsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="hotels" type="tns:hotels"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="hotels">
+    <xs:sequence>
+      <xs:element name="hotel" type="tns:hotel" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="hotel">
     <xs:sequence>
       <xs:element name="id" type="xs:long"/>

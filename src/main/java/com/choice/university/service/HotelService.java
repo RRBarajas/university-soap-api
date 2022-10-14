@@ -4,6 +4,7 @@ import com.choice.university.repository.HotelRepository;
 import com.choice.university.service.exception.EntityNotFoundException;
 import com.choice.university.service.mapper.HotelMapper;
 import com.choice.university.service.model.GetHotelResponse;
+import com.choice.university.service.model.GetHotelsResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,5 +24,11 @@ public class HotelService {
         .orElseThrow(() -> new EntityNotFoundException("Hotel", id));
 
     return mapper.mapToGetHotelResponse(hotel);
+  }
+
+  public GetHotelsResponse getHotelsByName(String name) {
+    var hotels = repository.findAllByNameContainingIgnoreCase(name);
+
+    return mapper.mapToGetHotelsResponse(hotels);
   }
 }
