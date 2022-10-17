@@ -35,10 +35,12 @@ public interface AmenityMapper {
 
   default Amenities mapToAmenities(List<Amenity> amenities) {
     var responseAmenities = new Amenities();
-    responseAmenities.getAmenity().addAll(
-        amenities.stream()
-            .map(this::mapToAmenity)
-            .toList());
+    if (amenities != null) {
+      responseAmenities.getAmenity().addAll(
+          amenities.stream()
+              .map(this::mapToAmenity)
+              .toList());
+    }
     return responseAmenities;
   }
 

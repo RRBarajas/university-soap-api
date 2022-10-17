@@ -1,6 +1,7 @@
 package com.choice.university.service.mapper;
 
 import static com.choice.university.util.UtilitiesForTest.getAmenity;
+import static com.choice.university.util.UtilitiesForTest.getAmenityEntity;
 import static com.choice.university.util.UtilitiesForTest.getAmenityList;
 import static com.choice.university.util.UtilitiesForTest.getAmenityListWithDuplicates;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,8 +17,8 @@ class AmenityMapperTest {
   @Test
   void shouldMapBetweenAmenities_whenPassingValidObject() {
     var amenityModel = getAmenity();
+    var amenityEntity = getAmenityEntity();
 
-    var amenityEntity = mapper.mapToAmenityEntity(amenityModel);
     var response = mapper.mapToGetAmenityResponse(amenityEntity);
 
     assertThat(response).as("Response should not be null")

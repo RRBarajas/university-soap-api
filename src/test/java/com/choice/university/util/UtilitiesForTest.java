@@ -14,6 +14,13 @@ public final class UtilitiesForTest {
   private UtilitiesForTest() {
   }
 
+  public static com.choice.university.entity.Amenity getAmenityEntity() {
+    var amenityEntity = new com.choice.university.entity.Amenity();
+    amenityEntity.setId(10L);
+    amenityEntity.setName("Amenity name");
+    return amenityEntity;
+  }
+
   public static Amenity getAmenity() {
     var amenity = new Amenity();
     amenity.setId(10L);
