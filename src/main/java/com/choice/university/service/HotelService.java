@@ -10,6 +10,7 @@ import com.choice.university.service.model.Amenities;
 import com.choice.university.service.model.CreateHotel;
 import com.choice.university.service.model.GetHotelResponse;
 import com.choice.university.service.model.GetHotelsResponse;
+import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -58,28 +59,33 @@ public class HotelService {
 
   public GetHotelResponse addAmenitiesToHotel(Long hotelId, Amenities amenities) {
     var hotel = getExistingHotel(hotelId);
-    var oldIds = amenityMapper.getAmenitiesIds(hotel.getAmenities());
+    var hotelAmenities = new ArrayList<>(hotel.getAmenities());
+    var oldIds = amenityMapper.getAmenitiesIds(hotelAmenities);
 
     var newAmenities = amenityMapper.mapToAmenitiesList(amenities);
 
     // TODO: Refactor Hotel to use Set and avoid these uniqueness checks
     newAmenities.forEach(amenity -> {
       if (!oldIds.contains(amenity.getId())) {
-        hotel.getAmenities().add(amenity);
+        hotelAmenities.add(amenity);
         oldIds.add(amenity.getId());
       }
     });
+    hotel.setAmenities(hotelAmenities);
 
     return mapper.mapToGetHotelResponse(repository.save(hotel));
   }
 
-  public GetHotelResponse removeAmenitiesToHotel(Long hotelId, Amenities amenities) {
+  public GetHotelResponse removeAmenitiesFromHotel(Long hotelId, Amenities amenities) {
     var hotel = getExistingHotel(hotelId);
 
     var amenitiesToRemove = amenityMapper.mapToAmenitiesList(amenities);
     var idsToRemove = amenityMapper.getAmenitiesIds(amenitiesToRemove);
 
-    hotel.getAmenities().removeIf(amenity -> idsToRemove.contains(amenity.getId()));
+    var remainingAmenities = hotel.getAmenities().stream()
+        .filter(toRemove -> !idsToRemove.contains(toRemove.getId()))
+        .toList();
+    hotel.setAmenities(remainingAmenities);
 
     return mapper.mapToGetHotelResponse(repository.save(hotel));
   }
