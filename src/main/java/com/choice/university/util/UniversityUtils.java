@@ -3,11 +3,11 @@ package com.choice.university.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public final class Utilities {
+public final class UniversityUtils {
 
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-  private Utilities() {
+  private UniversityUtils() {
   }
 
   /**
@@ -33,7 +33,7 @@ public final class Utilities {
       return OBJECT_MAPPER.readValue(object, clazz);
     } catch (JsonProcessingException e) {
       throw new RuntimeException(
-          String.format("Unable to create Class %s form Json", clazz.getName()));
+          String.format("Unable to create Class '%s' from JSON", clazz.getName()));
     }
   }
 }
