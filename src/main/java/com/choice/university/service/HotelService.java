@@ -1,9 +1,12 @@
 package com.choice.university.service;
 
+import com.choice.university.entity.Hotel;
 import com.choice.university.repository.HotelRepository;
 import com.choice.university.service.exception.AlreadyExistsException;
 import com.choice.university.service.exception.EntityNotFoundException;
+import com.choice.university.service.mapper.AmenityMapper;
 import com.choice.university.service.mapper.HotelMapper;
+import com.choice.university.service.model.Amenities;
 import com.choice.university.service.model.CreateHotel;
 import com.choice.university.service.model.GetHotelResponse;
 import com.choice.university.service.model.GetHotelsResponse;
@@ -14,16 +17,18 @@ public class HotelService {
 
   private final HotelRepository repository;
   private final HotelMapper mapper;
+  private final AmenityMapper amenityMapper;
 
   public HotelService(HotelRepository repository,
-      HotelMapper mapper) {
+      HotelMapper mapper,
+      AmenityMapper amenityMapper) {
     this.repository = repository;
     this.mapper = mapper;
+    this.amenityMapper = amenityMapper;
   }
 
   public GetHotelResponse getHotel(Long id) {
-    var hotel = repository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("Hotel", id));
+    var hotel = getExistingHotel(id);
 
     return mapper.mapToGetHotelResponse(hotel);
   }
@@ -40,8 +45,6 @@ public class HotelService {
     }
 
     var hotelEntity = mapper.mapToHotelEntity(hotel);
-
-    // TODO: If passing invalid Amenities, the response contains NIL nodes
     return mapper.mapToGetHotelResponse(repository.save(hotelEntity));
   }
 
@@ -49,6 +52,40 @@ public class HotelService {
     if (!repository.existsById(id)) {
       throw new EntityNotFoundException("Hotel", id);
     }
+
     repository.deleteById(id);
+  }
+
+  public GetHotelResponse addAmenitiesToHotel(Long hotelId, Amenities amenities) {
+    var hotel = getExistingHotel(hotelId);
+    var oldIds = amenityMapper.getAmenitiesIds(hotel.getAmenities());
+
+    var newAmenities = amenityMapper.mapToAmenitiesList(amenities);
+
+    // TODO: Refactor Hotel to use Set and avoid these uniqueness checks
+    newAmenities.forEach(amenity -> {
+      if (!oldIds.contains(amenity.getId())) {
+        hotel.getAmenities().add(amenity);
+        oldIds.add(amenity.getId());
+      }
+    });
+
+    return mapper.mapToGetHotelResponse(repository.save(hotel));
+  }
+
+  public GetHotelResponse removeAmenitiesToHotel(Long hotelId, Amenities amenities) {
+    var hotel = getExistingHotel(hotelId);
+
+    var amenitiesToRemove = amenityMapper.mapToAmenitiesList(amenities);
+    var idsToRemove = amenityMapper.getAmenitiesIds(amenitiesToRemove);
+
+    hotel.getAmenities().removeIf(amenity -> idsToRemove.contains(amenity.getId()));
+
+    return mapper.mapToGetHotelResponse(repository.save(hotel));
+  }
+
+  private Hotel getExistingHotel(Long id) {
+    return repository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("Hotel", id));
   }
 }

@@ -90,6 +90,24 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="addHotelAmenities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="hotelId" type="xs:long"/>
+        <xs:element name="amenities" type="tns:amenities"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="removeHotelAmenities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="hotelId" type="xs:long"/>
+        <xs:element name="amenities" type="tns:amenities"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
   <xs:complexType name="hotels">
     <xs:sequence>
       <xs:element name="hotel" type="tns:hotel" minOccurs="0" maxOccurs="unbounded"/>

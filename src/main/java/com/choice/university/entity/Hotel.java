@@ -34,6 +34,7 @@ public class Hotel {
   @JoinColumn(name = "address_id")
   private Address address;
 
+  // TODO: When upserting, non-existent IDs are returned as NULL (and NIL XML nodes)
   @ManyToMany(cascade = PERSIST)
   @NotFound(action = IGNORE)
   private List<Amenity> amenities;
