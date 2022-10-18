@@ -19,7 +19,8 @@ public final class UniversityUtils {
     try {
       return OBJECT_MAPPER.writeValueAsString(object);
     } catch (JsonProcessingException e) {
-      return "";
+      throw new RuntimeException(
+          String.format("Unable to create JSON from Class '%s'", object.getClass().getName()));
     }
   }
 

@@ -20,6 +20,8 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="getAmenitiesRequest" />
+
   <xs:element name="getAmenitiesResponse">
     <xs:complexType>
       <xs:sequence>

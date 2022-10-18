@@ -61,7 +61,7 @@ class AmenityEndpointTest {
     when(service.getAllAmenities()).thenReturn(amenitiesResponse);
 
     var request = new StringSource("""
-        <usi:getAmenitiesResponse xmlns:usi="http://www.encora.com/choice/university-soap-api" />
+        <usi:getAmenitiesRequest xmlns:usi="http://www.encora.com/choice/university-soap-api" />
         """);
 
     var amenitiesXpath = "usi:getAmenitiesResponse/usi:amenities";

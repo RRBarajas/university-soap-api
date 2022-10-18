@@ -26,7 +26,7 @@ public class AmenityEndpoint {
     return service.getAmenity(request.getId());
   }
 
-  @PayloadRoot(namespace = UNIVERSITY_NAMESPACE_URI, localPart = "getAmenitiesResponse")
+  @PayloadRoot(namespace = UNIVERSITY_NAMESPACE_URI, localPart = "getAmenitiesRequest")
   @ResponsePayload
   public GetAmenitiesResponse getAllAmenities() {
     return service.getAllAmenities();
