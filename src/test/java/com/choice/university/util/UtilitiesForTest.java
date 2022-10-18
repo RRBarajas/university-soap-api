@@ -4,7 +4,13 @@ import com.choice.university.service.model.Address;
 import com.choice.university.service.model.Amenities;
 import com.choice.university.service.model.Amenity;
 import com.choice.university.service.model.CreateHotel;
+import com.choice.university.service.model.GetAmenitiesResponse;
+import com.choice.university.service.model.GetAmenityResponse;
+import com.choice.university.service.model.GetHotelResponse;
+import com.choice.university.service.model.GetHotelsResponse;
 import com.choice.university.service.model.Hotel;
+import com.choice.university.service.model.Hotels;
+import com.choice.university.service.model.ObjectFactory;
 import java.util.List;
 
 /**
@@ -12,9 +18,12 @@ import java.util.List;
  */
 public final class UtilitiesForTest {
 
+  private static final ObjectFactory OBJECT_FACTORY = new ObjectFactory();
+
   private UtilitiesForTest() {
   }
 
+  // Amenities related mocks
   public static com.choice.university.entity.Amenity getAmenityEntity() {
     var amenityEntity = new com.choice.university.entity.Amenity();
     amenityEntity.setId(10L);
@@ -23,7 +32,7 @@ public final class UtilitiesForTest {
   }
 
   public static Amenity getAmenity() {
-    var amenity = new Amenity();
+    var amenity = OBJECT_FACTORY.createAmenity();
     amenity.setId(10L);
     amenity.setName("Amenity name");
     return amenity;
@@ -38,17 +47,30 @@ public final class UtilitiesForTest {
   }
 
   public static Amenities getAmenities() {
-    var amenities = new Amenities();
+    var amenities = OBJECT_FACTORY.createAmenities();
     amenities.getAmenity().addAll(getAmenityList());
     return amenities;
   }
 
   public static Amenities getAmenitiesWithDuplicates() {
-    var amenities = new Amenities();
+    var amenities = OBJECT_FACTORY.createAmenities();
     amenities.getAmenity().addAll(getAmenityListWithDuplicates());
     return amenities;
   }
 
+  public static GetAmenityResponse getAmenityResponse() {
+    var response = OBJECT_FACTORY.createGetAmenityResponse();
+    response.setAmenity(getAmenity());
+    return response;
+  }
+
+  public static GetAmenitiesResponse getAmenitiesResponse() {
+    var response = OBJECT_FACTORY.createGetAmenitiesResponse();
+    response.setAmenities(getAmenities());
+    return response;
+  }
+
+  //  Hotel related mocks
   public static com.choice.university.entity.Hotel getHotelEntity() {
     var hotel = new com.choice.university.entity.Hotel();
     hotel.setId(1L);
@@ -60,7 +82,7 @@ public final class UtilitiesForTest {
   }
 
   public static Hotel getHotel() {
-    var hotel = new Hotel();
+    var hotel = OBJECT_FACTORY.createHotel();
     hotel.setId(1L);
     hotel.setName("Hotel name");
     hotel.setRating(5);
@@ -69,8 +91,14 @@ public final class UtilitiesForTest {
     return hotel;
   }
 
+  public static Hotels getHotels() {
+    var hotels = OBJECT_FACTORY.createHotels();
+    hotels.getHotel().add(getHotel());
+    return hotels;
+  }
+
   public static CreateHotel getCreateHotel() {
-    var hotel = new CreateHotel();
+    var hotel = OBJECT_FACTORY.createCreateHotel();
     hotel.setId(1L);
     hotel.setName("Hotel name");
     hotel.setRating(5);
@@ -89,11 +117,23 @@ public final class UtilitiesForTest {
   }
 
   public static Address getAddress() {
-    var address = new Address();
+    var address = OBJECT_FACTORY.createAddress();
     address.setId(100L);
     address.setStreetName("Street name");
     address.setStateName("State name");
     address.setCountryName("Country name");
     return address;
+  }
+
+  public static GetHotelResponse getHotelResponse() {
+    var response = OBJECT_FACTORY.createGetHotelResponse();
+    response.setHotel(getHotel());
+    return response;
+  }
+
+  public static GetHotelsResponse getHotelsResponse() {
+    var response = OBJECT_FACTORY.createGetHotelsResponse();
+    response.setHotels(getHotels());
+    return response;
   }
 }
