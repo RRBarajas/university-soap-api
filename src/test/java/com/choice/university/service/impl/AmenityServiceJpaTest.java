@@ -1,4 +1,4 @@
-package com.choice.university.service;
+package com.choice.university.service.impl;
 
 import static com.choice.university.util.UtilitiesForTest.getAmenityEntity;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +20,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class AmenityServiceTest {
+class AmenityServiceJpaTest {
 
   @Spy
   private AmenityMapper mapper = Mappers.getMapper(AmenityMapper.class);
@@ -29,7 +29,7 @@ class AmenityServiceTest {
   private AmenityRepository repository;
 
   @InjectMocks
-  private AmenityService service;
+  private AmenityServiceJpa service;
 
   @Test
   void shouldThrowEntityNotFoundException_whenNotFindingEntityId() {

@@ -1,4 +1,4 @@
-package com.choice.university.service;
+package com.choice.university.service.impl;
 
 import static com.choice.university.util.UtilitiesForTest.getAmenities;
 import static com.choice.university.util.UtilitiesForTest.getAmenitiesWithDuplicates;
@@ -29,7 +29,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class HotelServiceTest {
+class HotelServiceJpaTest {
 
   @Spy
   private AmenityMapper amenityMapper = Mappers.getMapper(AmenityMapper.class);
@@ -42,7 +42,7 @@ class HotelServiceTest {
   private HotelRepository repository;
 
   @InjectMocks
-  private HotelService service;
+  private HotelServiceJpa service;
 
   @Test
   void shouldThrowEntityNotFoundException_whenHotelDoesntExist() {
