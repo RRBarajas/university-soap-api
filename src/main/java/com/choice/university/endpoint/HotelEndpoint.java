@@ -58,6 +58,6 @@ public class HotelEndpoint {
   @PayloadRoot(namespace = UNIVERSITY_NAMESPACE_URI, localPart = "removeHotelAmenities")
   @ResponsePayload
   public GetHotelResponse removeHotelAmenities(@RequestPayload RemoveHotelAmenities request) {
-    return service.removeAmenitiesToHotel(request.getHotelId(), request.getAmenities());
+    return service.removeAmenitiesFromHotel(request.getHotelId(), request.getAmenities());
   }
 }

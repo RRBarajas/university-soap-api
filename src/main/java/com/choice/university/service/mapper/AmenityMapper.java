@@ -47,7 +47,7 @@ public interface AmenityMapper {
   default List<Amenity> mapToAmenitiesList(Amenities amenities) {
     return amenities.getAmenity().stream()
         .map(this::mapToAmenityEntity)
-        .toList();
+        .collect(Collectors.toList());
   }
 
   default Set<Long> getAmenitiesIds(List<Amenity> amenities) {
