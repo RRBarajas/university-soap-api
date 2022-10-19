@@ -8,6 +8,7 @@ import com.choice.university.service.model.Hotels;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring", uses = {AmenityMapper.class})
 public interface HotelMapper {
@@ -19,13 +20,14 @@ public interface HotelMapper {
   @Mapping(source = ".", target = "hotel")
   GetHotelResponse mapToGetHotelResponse(Hotel hotel);
 
-  default GetHotelsResponse mapToGetHotelsResponse(List<Hotel> hotels) {
+  default GetHotelsResponse mapToGetHotelsResponse(Page<Hotel> hotels) {
     if (hotels == null) {
       return null;
     }
 
     var response = new GetHotelsResponse();
-    response.setHotels(mapToHotels(hotels));
+    response.setCount(hotels.getTotalElements());
+    response.setHotels(mapToHotels(hotels.getContent()));
     return response;
   }
 

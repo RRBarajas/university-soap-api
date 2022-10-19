@@ -63,7 +63,21 @@
   <xs:element name="getHotelsByName">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="name" type="xs:string"/>
+        <xs:element name="name" type="xs:string" default=""/>
+        <xs:element name="pageNumber" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:int">
+              <xs:minInclusive value="0"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="pageSize" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:int">
+              <xs:minInclusive value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -71,6 +85,7 @@
   <xs:element name="getHotelsResponse">
     <xs:complexType>
       <xs:sequence>
+        <xs:element name="count" type="xs:long"/>
         <xs:element name="hotels" type="tns:hotels"/>
       </xs:sequence>
     </xs:complexType>

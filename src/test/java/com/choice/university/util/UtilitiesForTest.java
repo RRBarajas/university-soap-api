@@ -133,7 +133,9 @@ public final class UtilitiesForTest {
 
   public static GetHotelsResponse getHotelsResponse() {
     var response = OBJECT_FACTORY.createGetHotelsResponse();
-    response.setHotels(getHotels());
+    var hotels = getHotels();
+    response.setHotels(hotels);
+    response.setCount(hotels.getHotel().size());
     return response;
   }
 }

@@ -12,6 +12,8 @@ import com.choice.university.service.model.CreateHotel;
 import com.choice.university.service.model.GetHotelResponse;
 import com.choice.university.service.model.GetHotelsResponse;
 import java.util.ArrayList;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,8 +39,9 @@ public class HotelServiceJpa implements HotelService {
   }
 
   @Override
-  public GetHotelsResponse getHotelsByName(String name) {
-    var hotels = repository.findAllByNameContainingIgnoreCase(name);
+  public GetHotelsResponse getHotelsByName(String name, int pageNumber, int pageSize) {
+    var pagination = PageRequest.of(pageNumber, pageSize, Sort.by("id"));
+    var hotels = repository.findAllByNameContainingIgnoreCase(name, pagination);
 
     return mapper.mapToGetHotelsResponse(hotels);
   }

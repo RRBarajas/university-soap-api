@@ -9,7 +9,7 @@ public interface HotelService {
 
   GetHotelResponse getHotel(Long id);
 
-  GetHotelsResponse getHotelsByName(String name);
+  GetHotelsResponse getHotelsByName(String name, int pageNumber, int pageSize);
 
   GetHotelResponse createHotel(CreateHotel hotel);
 

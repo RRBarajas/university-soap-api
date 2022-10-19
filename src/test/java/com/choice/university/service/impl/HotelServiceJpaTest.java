@@ -27,6 +27,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 @ExtendWith(MockitoExtension.class)
 class HotelServiceJpaTest {
@@ -69,11 +71,13 @@ class HotelServiceJpaTest {
 
   @Test
   void shouldReturnEmptyHotelList_whenNotFindingAnything() {
-    when(repository.findAllByNameContainingIgnoreCase(any())).thenReturn(List.of());
+    when(repository.findAllByNameContainingIgnoreCase(any(), any())).thenReturn(Page.empty());
 
-    var response = service.getHotelsByName("Random text");
+    var response = service.getHotelsByName("Random text", 0, 1);
     assertThat(response).as("Response should not be null")
         .isNotNull();
+    assertThat(response.getCount()).as("Count should be 0")
+        .isZero();
 
     var hotels = response.getHotels();
     assertThat(hotels).as("Hotels should not be null")
@@ -85,11 +89,15 @@ class HotelServiceJpaTest {
   @Test
   void shouldReturnValidAmenitiesList_whenFindingSomething() {
     var hotelEntityList = List.of(getHotelEntity());
-    when(repository.findAllByNameContainingIgnoreCase(any())).thenReturn(hotelEntityList);
+    var hotelEntityListPage = new PageImpl<>(hotelEntityList);
+    when(repository.findAllByNameContainingIgnoreCase(any(), any())).thenReturn(
+        hotelEntityListPage);
 
-    var response = service.getHotelsByName("Any given input");
+    var response = service.getHotelsByName("Any given input", 0, 1);
     assertThat(response).as("Response should not be null")
         .isNotNull();
+    assertThat(response.getCount()).as("Count should match the expected")
+        .isEqualTo(hotelEntityList.size());
 
     var hotelModelList = List.of(getHotel());
     var hotels = response.getHotels();
@@ -97,7 +105,7 @@ class HotelServiceJpaTest {
         .isNotNull();
     assertThat(hotels.getHotel()).as("Hotel list should match original")
         .isNotNull()
-        .hasSize(hotelModelList.size())
+        .hasSameSizeAs(hotelModelList)
         .usingRecursiveComparison()
         .isEqualTo(hotelModelList);
   }
@@ -180,6 +188,7 @@ class HotelServiceJpaTest {
     var newAmenities = getAmenities();
     var firstAmenity = newAmenities.getAmenity().get(0);
     firstAmenity.setId(firstAmenity.getId() + 1);
+
     var response = service.addAmenitiesToHotel(1L, newAmenities);
     assertThat(response).as("Response should not be null")
         .isNotNull();

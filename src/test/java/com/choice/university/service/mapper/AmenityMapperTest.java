@@ -37,7 +37,7 @@ class AmenityMapperTest {
     var mappedEntities = mapper.mapToAmenityEntityList(originalAmenities);
     assertThat(mappedEntities).as("List should not be null")
         .isNotNull()
-        .hasSize(originalAmenities.size());
+        .hasSameSizeAs(originalAmenities);
 
     for (int i = 0; i < originalAmenities.size(); i++) {
       assertThat(mappedEntities.get(i)).as("Object should match the original")

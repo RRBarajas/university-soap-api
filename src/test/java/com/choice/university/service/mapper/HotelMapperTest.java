@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
 
 @ExtendWith(MockitoExtension.class)
 class HotelMapperTest {
@@ -39,10 +40,13 @@ class HotelMapperTest {
   void shouldMapGetHotelsResponse_whenPassingValidEntityList() {
     var hotelModel = getHotel();
     var hotelEntities = List.of(mapper.mapToHotelEntity(hotelModel));
+    var entitiesPage = new PageImpl<>(hotelEntities);
 
-    var response = mapper.mapToGetHotelsResponse(hotelEntities);
+    var response = mapper.mapToGetHotelsResponse(entitiesPage);
     assertThat(response).as("Response should not be null")
         .isNotNull();
+    assertThat(response.getCount()).as("Count should match the expected")
+        .isEqualTo(hotelEntities.size());
 
     var responseHotels = response.getHotels();
     assertThat(responseHotels).as("Hotels should not be null")
