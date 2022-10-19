@@ -11,6 +11,7 @@ import com.choice.university.service.model.GetHotelResponse;
 import com.choice.university.service.model.GetHotelsByName;
 import com.choice.university.service.model.GetHotelsResponse;
 import com.choice.university.service.model.RemoveHotelAmenities;
+import java.util.Optional;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -34,7 +35,9 @@ public class HotelEndpoint {
   @PayloadRoot(namespace = UNIVERSITY_NAMESPACE_URI, localPart = "getHotelsByName")
   @ResponsePayload
   public GetHotelsResponse getHotelsByName(@RequestPayload GetHotelsByName request) {
-    return service.getHotelsByName(request.getName());
+    return service.getHotelsByName(request.getName(),
+        Optional.ofNullable(request.getOffset()).orElse(0),
+        Optional.ofNullable(request.getLimit()).orElse(1));
   }
 
   @PayloadRoot(namespace = UNIVERSITY_NAMESPACE_URI, localPart = "createHotel")

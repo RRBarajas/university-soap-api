@@ -83,7 +83,7 @@ class AmenityServiceJpaTest {
         .isNotNull();
     assertThat(amenities.getAmenity()).as("Amenity list should match original")
         .isNotNull()
-        .hasSize(amenityEntityList.size())
+        .hasSameSizeAs(amenityEntityList)
         .usingRecursiveComparison()
         .isEqualTo(amenityEntityList);
   }

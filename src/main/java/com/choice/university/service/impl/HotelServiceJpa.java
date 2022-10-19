@@ -11,10 +11,15 @@ import com.choice.university.service.model.Amenities;
 import com.choice.university.service.model.CreateHotel;
 import com.choice.university.service.model.GetHotelResponse;
 import com.choice.university.service.model.GetHotelsResponse;
+import com.choice.university.util.UniversityUtils;
 import java.util.ArrayList;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class HotelServiceJpa implements HotelService {
 
   private final HotelRepository repository;
@@ -37,8 +42,10 @@ public class HotelServiceJpa implements HotelService {
   }
 
   @Override
-  public GetHotelsResponse getHotelsByName(String name) {
-    var hotels = repository.findAllByNameContainingIgnoreCase(name);
+  public GetHotelsResponse getHotelsByName(String name, int offset, int size) {
+    var pagination = PageRequest.of(offset, size, Sort.by("id"));
+    var hotels = repository.findAllByNameContainingIgnoreCase(name, pagination);
+    log.info("Hotels: {}", UniversityUtils.toJson(hotels));
 
     return mapper.mapToGetHotelsResponse(hotels);
   }

@@ -5,6 +5,7 @@ import static com.choice.university.util.UtilitiesForTest.getHotelResponse;
 import static com.choice.university.util.UtilitiesForTest.getHotelsResponse;
 import static java.lang.String.format;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.ws.test.server.RequestCreators.withPayload;
@@ -52,7 +53,7 @@ class HotelEndpointTest {
   void shouldReturnValidXMLGetAmenitiesResponse_whenCallingGetAllAmenities() {
     var hotelsResponse = getHotelsResponse();
     var firstHotel = hotelsResponse.getHotels().getHotel().get(0);
-    when(service.getHotelsByName(any())).thenReturn(hotelsResponse);
+    when(service.getHotelsByName(any(), anyInt(), anyInt())).thenReturn(hotelsResponse);
 
     var request = new StringSource("""
         <usi:getHotelsByName xmlns:usi="http://www.encora.com/choice/university-soap-api">
@@ -64,6 +65,8 @@ class HotelEndpointTest {
     var firstHotelXpath = format("%s[1]/usi:hotel", hotelsXpath);
     client.sendRequest(withPayload(request))
         .andExpect(noFault())
+        .andExpect(xpath("usi:getHotelsResponse/usi:count", NAMESPACE_MAPPING)
+            .evaluatesTo(hotelsResponse.getHotels().getHotel().size()))
         .andExpect(xpath(hotelsXpath, NAMESPACE_MAPPING)
             .exists())
         .andExpect(xpath(String.format("%s[1]", hotelsXpath), NAMESPACE_MAPPING)
