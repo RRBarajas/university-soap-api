@@ -36,8 +36,8 @@ public class HotelEndpoint {
   @ResponsePayload
   public GetHotelsResponse getHotelsByName(@RequestPayload GetHotelsByName request) {
     return service.getHotelsByName(request.getName(),
-        Optional.ofNullable(request.getOffset()).orElse(0),
-        Optional.ofNullable(request.getLimit()).orElse(1));
+        Optional.ofNullable(request.getPageNumber()).orElse(0),
+        Optional.ofNullable(request.getPageSize()).orElse(1));
   }
 
   @PayloadRoot(namespace = UNIVERSITY_NAMESPACE_URI, localPart = "createHotel")

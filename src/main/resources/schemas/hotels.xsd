@@ -64,14 +64,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="name" type="xs:string" default=""/>
-        <xs:element name="offset" minOccurs="0">
+        <xs:element name="pageNumber" minOccurs="0">
           <xs:simpleType>
             <xs:restriction base="xs:int">
               <xs:minInclusive value="0"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
-        <xs:element name="limit" minOccurs="0">
+        <xs:element name="pageSize" minOccurs="0">
           <xs:simpleType>
             <xs:restriction base="xs:int">
               <xs:minInclusive value="1"/>
