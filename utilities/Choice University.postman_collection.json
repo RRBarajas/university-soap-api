@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "77e4115b-1bcf-4ed7-85d8-4b7ce2f18b7b",
+		"name": "Choice University",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22371589"
+	},
+	"item": [
+		{
+			"name": "SOAP API",
+			"item": [
+				{
+					"name": "getAmenity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:getAmenityRequest>\n            <usi:id>1</usi:id>\n        </usi:getAmenityRequest>\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAmenities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:getAmenitiesRequest />\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHotelById",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:getHotelById>\n            <usi:id>2</usi:id>\n        </usi:getHotelById>\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHotelsByName",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:getHotelsByName>\n            <usi:name></usi:name>\n            <usi:pageNumber>2</usi:pageNumber>\n            <usi:pageSize>3</usi:pageSize>\n        </usi:getHotelsByName>\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createHotel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:createHotel>\n            <usi:id>10</usi:id>\n            <usi:name>Acme hotels</usi:name>\n            <usi:rating>1</usi:rating>\n            <usi:address>\n                <usi:id>3</usi:id>\n                <usi:streetName>Street</usi:streetName>\n                <usi:stateName>Hanna</usi:stateName>\n                <usi:countryName>Barbera</usi:countryName>\n            </usi:address>\n            <usi:address>\n                <usi:id>4</usi:id>\n                <usi:streetName>Other one</usi:streetName>\n                <usi:stateName>Yes</usi:stateName>\n                <usi:countryName>No</usi:countryName>\n            </usi:address>\n            <usi:amenities>\n                <usi:amenity>\n                    <usi:id>1</usi:id>\n                    <usi:name>Internet</usi:name>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>2</usi:id>\n                    <usi:name>Unknown</usi:name>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>3</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>8</usi:id>\n                </usi:amenity>\n            </usi:amenities>\n        </usi:createHotel>\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHotel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:deleteHotel>\n            <usi:id>5</usi:id>\n        </usi:deleteHotel>\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addHotelAmenities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:addHotelAmenities>\n            <usi:hotelId>2</usi:hotelId>\n            <usi:amenities>\n                <usi:amenity>\n                    <usi:id>1</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>2</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>3</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>8</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>8</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>9</usi:id>\n                </usi:amenity>\n            </usi:amenities>\n        </usi:addHotelAmenities>\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeHotelAmenities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n  xmlns:usi=\"http://www.encora.com/choice/university-soap-api\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <usi:removeHotelAmenities>\n            <usi:hotelId>2</usi:hotelId>\n            <usi:amenities>\n                <usi:amenity>\n                    <usi:id>1</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>2</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>3</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>8</usi:id>\n                </usi:amenity>\n                <usi:amenity>\n                    <usi:id>8</usi:id>\n                </usi:amenity>\n            </usi:amenities>\n        </usi:removeHotelAmenities>\n    </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:8081/ws",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"ws"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "REST API",
+			"item": [
+				{
+					"name": "getAmenity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/amenities/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"amenities",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAmenities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/amenities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"amenities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHotelsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/hotels/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"hotels",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHotelsByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/hotels?name=a&pageNumber=0&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"hotels"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHotel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/hotels/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"hotels",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createHotel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 30,\n    \"name\": \"Entirely new\",\n    \"rating\": 3,\n    \"address\": {\n        \"id\": 5,\n        \"streetName\": \"Other one\",\n        \"stateName\": \"Yes\",\n        \"countryName\": \"No\"\n    },\n    \"amenities\": {\n        \"amenity\": [\n            {\n                \"id\": 8,\n                \"name\": \"Cable\"\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Cable\"\n            },\n            {\n                \"id\": 1,\n                \"name\": \"Fake\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/hotels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"hotels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addHotelAmenities",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amenities\": {\n        \"amenity\": [\n            {\n                \"id\": 6,\n                \"name\": \"Cable\"\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Cable\"\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Other cable\"\n            },\n            {\n                \"id\": 1,\n                \"name\": \"Fake\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/hotels/6/amenities/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"hotels",
+								"6",
+								"amenities",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeHotelAmenities",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amenities\": {\n        \"amenity\": [\n            {\n                \"id\": 6\n            },\n            {\n                \"id\": 8\n            },\n            {\n                \"id\": 1,\n                \"name\": \"Fake\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/cu-rest-api/hotels/6/amenities/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"cu-rest-api",
+								"hotels",
+								"6",
+								"amenities",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
